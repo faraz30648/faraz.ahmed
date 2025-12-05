@@ -934,8 +934,12 @@
           .footer-icons a:hover svg {
               opacity: 1;
           }
-        
           
+          /* Make footer text not bold */
+          .footer p {
+              font-weight: 400 !important;
+}
+
           .flex {
               display: flex;
           }
@@ -1397,6 +1401,8 @@
       .pm-name {
           font-size: 26px;
           margin-bottom: 14px;
+          text-align: center
+         
       }
   }
 
@@ -1444,6 +1450,58 @@
       scroll-behavior: auto !important;
   }
 
+    /* Fix: Smaller carousel text on mobile */
+@media (max-width: 480px) {
+    .carousel-item h4 {
+        font-size: 16px !important;
+    }
+    .carousel-item .company {
+        font-size: 14px !important;
+    }
+    .carousel-item .date {
+        font-size: 13px !important;
+    }
+}
+
+/* Fix: Smaller footer text + icons on mobile */
+@media (max-width: 480px) {
+    .footer {
+        padding: 12px !important;
+    }
+
+    .footer-icons svg {
+        width: 12px !important;
+        height: 12px !important;
+    }
+
+    .footer p {
+        font-size: 12px !important;
+    }
+}
+
+    /* Pill styling for role inside Profile Modal */
+.role-pill-wrapper {
+    text-align: center !important;
+}
+
+.role-pill {
+    display: inline-block;
+    padding: 6px 14px;
+    background: rgba(255,255,255,0.18);
+    border: 1px solid rgba(255,255,255,0.28);
+    border-radius: 999px;   /* pill shape */
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    color: white;
+    backdrop-filter: blur(12px);
+}
+
+    .role-pill:hover {
+    box-shadow: 0 0 12px rgba(255,255,255,0.6);
+    transform: translateY(-2px);
+    transition: 0.25s ease;
+}
 
       </style>
   </head>
@@ -1520,15 +1578,14 @@
                   <h2 class="section-title">Impact & Contributions</h2>
                   <div class="experience-card">
                       <ul>
-                          <li>Managed player concerns for online games with expertise.</li>
-                          <li>Handled high-volume inbound and outbound communications across calls, emails, and chats.</li>
-                          <li>Ensured seamless communication between partners and internal technical teams by clearly conveying the root cause, next steps, and resolution timelines.</li>
-                          <li></li>
-                          <li>Partnered with Product Managers to translate customer feedback into product roadmap items, prioritizing continuous improvement across support touchpoints</li>
-                          <li>Coordinated with multiple stakeholders—partners, product, and engineering teams—to identify breakdowns and ensure swift, accurate communication between POCs.</li>
-                          <li>Trained and mentored junior team members to handle complex queries and uphold service standards</li>
-                          <li>Enhanced operational efficiency by building automation tools that reduced dependency on manual lookups and improved support productivity.</li>
-                          <li>Drove continuous process improvements by using insights from support data to optimize communication flow and ticket management.</li>
+                          <ul>
+  <li>Managed high-volume multi-channel support (calls, email, chat, Discord) while maintaining strong CSAT and SLA adherence.</li>
+  <li>Led cross-functional collaboration between partners, product, and engineering teams to resolve technical escalations efficiently.</li>
+  <li>Partnered with Product Managers to convert customer feedback into roadmap priorities, driving continuous improvement.</li>
+  <li>Developed automation tools & dashboards reducing manual effort for 200+ users.</li>
+  <li>Trained & mentored junior teams on complex query handling and service standards.</li>
+  <li>Optimized support processes through data-driven insights, SOPs, and streamlined workflows.</li>
+</ul>
                       </ul>
                   </div>
               </section>
@@ -1612,7 +1669,6 @@
                                   <li>Processed and resolved 100+ daily interactions, balancing speed and quality in a high-volume environment.</li>
                                   <li>Coordinated with internal teams to resolve escalated cases efficiently and maintain a positive customer sentiment on public channels.</li>
                                   <li>Contributed to improving escalation workflows, reducing turnaround time and enhancing service consistency across channels.</li>
-                                  <li></li>
                               </ul>
                           </article>
                       </div>
@@ -2102,7 +2158,10 @@
       <div class="profile-details">
           <h2 class="pm-name">Faraz Ahmed</h2>
 
-          <p class="detail-row"><strong>Senior Associate Manager (CX)</p>
+          <p class="detail-row role-pill-wrapper">
+    <span class="role-pill">Senior Associate Manager (CX)</span>
+</p>
+
           <p class="detail-row"><strong>Location:</strong> Bangalore</p>
           <p class="detail-row"><strong>Phone:</strong> +91 96639 16454</p>
           <p class="detail-row"><strong>Email:</strong> faraz30648@gmail.com</p>
