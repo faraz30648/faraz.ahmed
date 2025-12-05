@@ -1402,6 +1402,8 @@
           font-size: 26px;
           margin-bottom: 14px;
           text-align: center
+          width: 100%;
+          
          
       }
   }
@@ -1482,7 +1484,10 @@
     /* Pill styling for role inside Profile Modal */
 .role-pill-wrapper {
     text-align: center !important;
+    margin-top: -4px;   /* small visual balance */
+    margin-bottom: 12px;
 }
+
 
 .role-pill {
     display: inline-block;
@@ -1502,6 +1507,59 @@
     transform: translateY(-2px);
     transition: 0.25s ease;
 }
+
+/* Center only the name + pill inside details block */
+.profile-details {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* centers children horizontally */
+}
+
+/* Keep other rows left aligned */
+.detail-row {
+    width: 100%;
+    text-align: left;
+}
+
+
+/* Centered name + pill header */
+.profile-modal-header-center {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.profile-modal-header-center .pm-name {
+    margin-bottom: 8px;
+}
+
+.profile-modal-header-center .role-pill {
+    display: inline-block;
+    margin: 0 auto;
+}
+
+/* Remove unwanted centering from details (it was causing misalignment) */
+.profile-details {
+    align-items: flex-start !important;
+}
+
+/* Make the centered header visually clean */
+.role-pill {
+    padding: 6px 14px;
+    background: rgba(255,255,255,0.18);
+    border: 1px solid rgba(255,255,255,0.28);
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 600;
+    display: inline-block;
+    backdrop-filter: blur(12px);
+    transition: 0.25s ease;
+}
+
+.role-pill:hover {
+    box-shadow: 0 0 12px rgba(255,255,255,0.6);
+    transform: translateY(-2px);
+}
+
 
       </style>
   </head>
@@ -2146,7 +2204,14 @@
       <div class="profile-modal-backdrop"></div>
 
       <div class="profile-modal-box">
-          <button id="profileModalClose" class="profile-modal-close">×</button>
+
+    <button id="profileModalClose" class="profile-modal-close">×</button>
+
+    <!-- NEW HEADER -->
+    <div class="profile-modal-header-center">
+        <h2 class="pm-name">Faraz Ahmed</h2>
+        <span class="role-pill">Senior Associate Manager (CX)</span>
+    </div>
 
           <div class="profile-modal-content">
 
@@ -2156,11 +2221,8 @@
            alt="Profile">
 
       <div class="profile-details">
-          <h2 class="pm-name">Faraz Ahmed</h2>
 
-          <p class="detail-row role-pill-wrapper">
-    <span class="role-pill">Senior Associate Manager (CX)</span>
-</p>
+          
 
           <p class="detail-row"><strong>Location:</strong> Bangalore</p>
           <p class="detail-row"><strong>Phone:</strong> +91 96639 16454</p>
