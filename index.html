@@ -1,0 +1,2139 @@
+  <!DOCTYPE html>
+  <html lang="en">
+
+  <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <title>Faraz Ahmed</title>
+      <link rel="icon" type="image/png" href="https://i.ibb.co/r2srGXB4/Untitled-design-1.png">
+      <link href="https://fonts.googleapis.com/css2?family=Merriweather&display=swap" rel="stylesheet" />
+      <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet" />
+      <style>
+  /* ================================
+     CLEAN CAROUSEL SYSTEM (FINAL)
+     ================================ */
+
+  /* Carousel container structure */
+  .carousel-container {
+      position: relative;
+  }
+
+  /* Horizontal track */
+  .carousel-track {
+      display: flex;
+      gap: 24px;
+      overflow-x: auto;
+      scroll-behavior: smooth;
+      scroll-snap-type: x mandatory;
+      padding: 0 0 16px 0;
+      scrollbar-width: none;
+  }
+  .carousel-track::-webkit-scrollbar {
+      display: none;
+  }
+
+  /* === CARD DESIGN === */
+  .carousel-item {
+      position: relative;
+      min-width: calc(100% - 60px); /* next card peeks */
+      height: 150px;                /* uniform card height */
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 12px;
+      padding: 20px;
+      scroll-snap-align: start;
+      display: flex;
+      flex-direction: column;
+      justify-content: center; /* center vertically */
+      padding-right: 110px;    /* create space for bigger logo */
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+  }
+
+  /* Work logo inside card */
+  .carousel-item .work-logo {
+      position: absolute;
+      top: 50%;
+      right: 20px;
+      transform: translateY(-50%);
+
+      width: 74px;
+      height: 74px;
+
+      object-fit: contain;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.1);
+      pointer-events: none;
+  }
+
+
+  /* Title / Company / Date */
+  .carousel-item h4 {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 6px;
+      color: white;
+  }
+  .carousel-item .company {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 4px;
+      color: rgba(255,255,255,0.95);
+  }
+  .carousel-item .date {
+      font-size: 16px;
+      margin-bottom: 22px !important;
+      color: rgba(255,255,255,0.85);
+  }
+
+
+  /* === NAVIGATION BUTTONS === */
+  .carousel-nav {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.9);
+      color: black;
+      border: none;
+      font-size: 20px;
+      cursor: pointer;
+      transition: 0.25s ease;
+  }
+  .carousel-nav:hover:not(:disabled) {
+      background: black;
+      color: white;
+  }
+  .carousel-nav:disabled {
+      background: rgba(255,255,255,0.2);
+      color: rgba(255,255,255,0.4);
+      border: 1px solid rgba(255,255,255,0.05);
+      cursor: not-allowed;
+  }
+
+  /* === DOT INDICATORS === */
+  .carousel-indicator {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.35);
+      border: none;
+      transition: 0.3s;
+  }
+
+  .carousel-indicator.active {
+      background: white;
+      transform: scale(1.25);
+  }
+
+  /* === MOBILE REFINEMENTS === */
+  @media (max-width: 768px) {
+      .carousel-item {
+          min-width: calc(100% - 50px);
+          height: 150px;
+      }
+  }
+
+  @media (max-width: 768px) {
+      .carousel-item {
+          padding-right: 80px; /* was 110px */
+      }
+
+      .carousel-item h4 {
+          font-size: 18px; /* smaller heading */
+      }
+
+      .carousel-item .company {
+          font-size: 16px;
+      }
+
+      .carousel-item .date {
+          font-size: 14px;
+          margin-bottom: 14px;
+      }
+
+      .carousel-item .work-logo {
+          width: 58px;
+          height: 58px;
+          right: 14px;
+      }
+  }
+
+
+  /* Next card peek space */
+  .carousel-track {
+      padding-right: 32px;
+  }
+
+  /* Text layout inside card */
+  .carousel-item h4,
+  .carousel-item .company,
+  .carousel-item .date {
+      margin: 0 0 4px 0;
+  }
+
+  /* Completely hide preview bullets ONLY in carousel cards */
+  .carousel-item ul {
+      display: none !important;
+  }
+
+
+      .modal-header-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 20px;
+  }
+
+  .modal-logo-left {
+      width: 60px;
+      height: 60px;
+      object-fit: contain;
+      border-radius: 12px;
+  }
+
+  .modal-header-text {
+      flex: 1;
+  }
+
+  .modal-role {
+      font-size: 20px;
+      font-weight: 700;
+      margin: 0 0 4px 0;
+  }
+
+  .modal-company {
+      font-size: 16px;
+      opacity: 0.9;
+      margin-bottom: 4px;
+  }
+
+  .modal-date {
+      font-size: 14px;
+      opacity: 0.8;
+  }
+
+
+      /* Premium Modal Layout */
+  .modal-header-block {
+      text-align: center;
+      margin-bottom: 20px;
+  }
+
+  .modal-logo {
+      width: 120px;
+      height: 120px;
+      border-radius: 18px;
+      display: block;
+      margin: auto;
+      object-fit: contain;
+  }
+
+  .modal-role {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 6px;
+  }
+
+  .modal-company {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 4px;
+      opacity: 0.9;
+  }
+
+  .modal-date {
+      font-size: 14px;
+      margin-bottom: 16px;
+      opacity: 0.85;
+  }
+
+  /* Bullet styling */
+  .modal-bullets {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+  }
+
+  .modal-bullets li {
+      padding-left: 20px;
+      position: relative;
+      margin-bottom: 10px;
+      line-height: 1.6;
+  }
+
+  .modal-bullets li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      top: 4px;
+      font-size: 18px;
+      opacity: 0.9;
+  }
+
+
+      /* --- Modal Content Improvements --- */
+  .work-modal-box img {
+      max-width: 160px !important;
+      max-height: 160px !important;
+      object-fit: contain;
+      display: block;
+      margin: 0 auto 20px auto;
+      border-radius: 12px;
+  }
+
+  #workModalContent {
+      max-height: 65vh;
+      overflow-y: auto;
+      padding-right: 6px;
+  }
+
+  /* Better spacing inside modal */
+  #workModalContent h4,
+  #workModalContent .company,
+  #workModalContent .date {
+      margin-bottom: 6px;
+  }
+
+  #workModalContent ul {
+      margin-top: 10px;
+  }
+
+
+
+        /* --- Work Experience Modal --- */
+  .work-modal {
+      position: fixed;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 99999;
+  }
+
+  .work-modal.active {
+      display: flex;
+  }
+
+  .work-modal-backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.55);
+      backdrop-filter: blur(10px);
+  }
+
+  .work-modal-box {
+      position: relative;
+      max-width: 520px;
+      width: 90%;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 16px;
+      padding: 24px;
+      color: white;
+      box-shadow: 0 8px 26px rgba(0,0,0,0.4);
+      backdrop-filter: blur(16px);
+      animation: fadeInScale 0.25s ease-out;
+  }
+
+  .work-modal-close {
+      background: rgba(255,255,255,0.15);
+      color: white;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-bottom: 16px;
+  }
+
+  @keyframes fadeInScale {
+      0% { opacity: 0; transform: scale(0.92); }
+      100% { opacity: 1; transform: scale(1); }
+  }
+
+          /* CSS Variables - Light Mode Default */
+          :root {
+              --color-white: rgba(255, 255, 255, 1);
+              --color-background: rgba(245, 247, 250, 1);
+              --color-surface: rgba(255, 255, 255, 0.18); /* glassy by default */
+              --color-text: rgba(19, 52, 59, 1);
+              --color-text-secondary: rgba(98, 108, 113, 0.8);
+              --color-primary: rgba(0, 0, 0, 1);
+              --color-primary-hover: rgb(128, 128, 128);
+              --color-border: rgba(94, 82, 64, 0.1);
+              --color-card-border: rgba(255, 255, 255, 0.08);
+              --font-family-base: "Montserrat", "FKGroteskNeue", "Inter", sans-serif;
+              --font-family-tagline: "Merriweather", serif;
+              --font-size-base: 14px;
+              --font-size-lg: 16px;
+              --font-size-xl: 18px;
+              --font-size-2xl: 20px;
+              --font-size-3xl: 26px;
+              --font-size-4xl: 38px;
+              --font-weight-medium: 500;
+              --font-weight-semibold: 600;
+              --font-weight-bold: 700;
+              --space-8: 8px;
+              --space-12: 12px;
+              --space-16: 16px;
+              --space-24: 24px;
+              --space-32: 32px;
+              --space-48: 48px;
+              --space-64: 64px;
+              --radius-base: 8px;
+              --radius-lg: 12px;
+              --radius-full: 9999px;
+              --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+              --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
+              --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.6), 0 4px 6px -2px rgba(0, 0, 0, 0.1);
+
+              /* parallax variable */
+              --bg-shift: 0px;
+          }
+
+          @font-face {
+              font-family: 'FKGroteskNeue';
+              src: url('https://r2cdn.perplexity.ai/fonts/FKGroteskNeue.woff2') format('woff2');
+          }
+
+          * {
+              margin: 0;
+              padding: 0;
+              box-sizing: border-box;
+          }
+
+          html {
+              font-family: var(--font-family-base);
+              font-size: var(--font-size-base);
+              color: var(--color-text);
+              background-color: var(--color-background);
+              background-image: url("data:image/svg+xml,%3Csvg width='6' height='6' viewBox='0 0 6 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%239C9C9C' fill-opacity='0.1' fill-rule='evenodd'%3E%3Cpath d='M3 0h3v3H3z'/%3E%3Cpath d='M0 3h3v3H0z'/%3E%3C/g%3E%3C/svg%3E");
+              scroll-behavior: smooth;
+          }
+
+          /* === FULL-PAGE BLURRED PROFILE BACKGROUND (mobile-safe parallax) === */
+          /* Body pseudo element is fixed and spans full viewport. We'll offset its background-position using --bg-shift */
+          body::before {
+              content: "";
+              position: fixed;
+              top: 0;
+              left: 0;
+              width: 100%;
+              height: 100%;
+              background-image: url("https://i.ibb.co/r2srGXB4/Untitled-design-1.png");
+              background-size: cover;
+              background-position: center calc(50% + var(--bg-shift));
+              /* smoothing & look */
+              filter: blur(24px) brightness(0.75);
+              z-index: -2;
+              transform: scale(1.08); /* slightly scale so edges don't show when blurred */
+              transition: background-position 0.12s linear;
+              will-change: background-position;
+          }
+
+          /* dim overlay to improve contrast for text */
+          body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.50); /* stronger soft black veil */
+      backdrop-filter: blur(2px);      /* gives depth */
+      z-index: -1;
+      pointer-events: none;
+  }
+
+
+          /* --- SWIPE-DOWN FIX: STRUCTURAL CSS --- */
+          body {
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden; /* prevents sideways scroll but fixes bottom white line */
+      overflow-y: auto;   /* allow page to grow normally */
+  }
+
+
+          body.header-open {
+              overflow-y: auto;
+          }
+
+          .header {
+              min-height: 100vh;
+              display: flex;
+              flex-direction: column;
+              justify-content: flex-start;
+              background-color: rgba(255, 255, 255, 0.12); /* glassy header */
+              color: var(--color-text);
+              padding: var(--space-64) var(--space-24) var(--space-48);
+              text-align: center;
+              position: fixed;
+              top: 0;
+              left: 0;
+              width: 100%;
+              z-index: 50;
+              overflow: hidden;
+              transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+              backdrop-filter: blur(12px);
+              border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+              color: white;
+          }
+
+          body.header-open .header {
+              transform: translateY(-100vh);
+          }
+
+          .content-wrapper {
+              position: relative;
+              z-index: 10;
+              margin-top: 100vh;
+              transition: margin-top 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+          }
+
+          body.header-open .content-wrapper {
+              margin-top: 0;
+          }
+
+          .header::after {
+              content: '';
+              position: absolute;
+              top: 0;
+              left: 0;
+              right: 0;
+              bottom: 0;
+              background: radial-gradient(circle at 70% 30%, rgba(50, 184, 198, 0.08) 0%, transparent 60%);
+              pointer-events: none;
+          }
+
+          /* --- REDESIGNED HEADER CONTENT --- */
+          .header-content {
+              max-width: 768px;
+              margin: 0 auto;
+              position: relative;
+              z-index: 1;
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              flex-grow: 1;
+              justify-content: center;
+              padding: 0 var(--space-12);
+          }
+
+          .profile-pic {
+              width: 100px;
+              height: 100px;
+              border-radius: 20%;
+              border: 3px solid rgba(255,255,255,0.9);
+              box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+              object-fit: cover;
+              margin-bottom: var(--space-24);
+          }
+
+          .header h1 {
+              font-size: clamp(var(--font-size-3xl), 8vw, var(--font-size-4xl));
+              font-weight: var(--font-weight-bold);
+              margin-bottom: var(--space-12);
+              color: white;
+          }
+
+          .header .tagline {
+              font-size: clamp(var(--font-size-base), 4vw, var(--font-size-lg));
+              font-family: var(--font-family-tagline);
+              font-style: italic;
+              letter-spacing: 0.2px;
+              margin-bottom: var(--space-32);
+              width: 100%;
+              max-width: 600px;
+              line-height: 1.6;
+              color: rgba(255,255,255,0.95);
+          }
+
+          .social-links {
+              display: flex;
+              justify-content: center;
+              gap: var(--space-16);
+              margin-top: var(--space-12);
+              margin-bottom: var(--space-48);
+              flex-wrap: wrap;
+          }
+
+          .social-link {
+              display: inline-flex;
+              align-items: center;
+              padding: 8px 12px;
+              background: rgba(255,255,255,0.08);
+              border-radius: var(--radius-base);
+              color: var(--color-white);
+              text-decoration: none;
+              font-weight: var(--font-weight-medium);
+              transition: all 0.25s ease;
+              font-size: var(--font-size-base);
+              border: 1px solid rgba(255,255,255,0.06);
+          }
+
+          .social-link:hover {
+              background: rgba(255,255,255,0.12);
+              color: var(--color-white);
+              transform: translateY(-2px);
+              border-color: rgba(255,255,255,0.12);
+          }
+
+          .social-link svg {
+              margin-right: var(--space-8);
+              width: 18px;
+              height: 18px;
+              fill: currentColor;
+          }
+
+          /* --- END REDESIGNED HEADER CONTENT --- */
+
+
+          /* Hamburger Menu STYLES */
+          .nav-menu {
+              position: absolute;
+              top: 0;
+              left: 0;
+              z-index: 1000;
+          }
+
+          .menu-toggle {
+              background: none;
+              border: none;
+              color: var(--color-white);
+              font-size: 24px;
+              padding: var(--space-16);
+              cursor: pointer;
+              position: relative;
+              z-index: 1001;
+          }
+
+          .menu-icon {
+              display: block;
+              width: 25px;
+              height: 3px;
+              background: var(--color-white);
+              position: relative;
+              transition: background 0.3s ease-in-out;
+          }
+
+          .menu-icon::before,
+          .menu-icon::after {
+              content: '';
+              display: block;
+              width: 25px;
+              height: 3px;
+              background: var(--color-white);
+              position: absolute;
+              left: 0;
+              transition: transform 0.3s ease-in-out;
+          }
+
+          .menu-icon::before {
+              top: -8px;
+          }
+
+          .menu-icon::after {
+              top: 8px;
+          }
+
+          .menu-toggle.active .menu-icon {
+              background: transparent;
+          }
+
+          .menu-toggle.active .menu-icon::before {
+              transform: translateY(8px) rotate(45deg);
+          }
+
+          .menu-toggle.active .menu-icon::after {
+              transform: translateY(-8px) rotate(-45deg);
+          }
+
+          .nav-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 220px;
+      height: 100%;
+      background: rgba(15, 15, 15, 0.95); /* still opaque */
+      transform: translateX(-100%);
+      transition: transform 0.3s ease-in-out;
+      box-shadow: 0 0 40px rgba(0,0,0,0.65); /* slight depth */
+      padding-top: 80px;
+      z-index: 1000;
+      overflow: hidden; /* IMPORTANT for masking the veil */
+  }
+  .nav-list::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.35);  /* soft black veil */
+      backdrop-filter: blur(18px);   /* translucent glassy blur */
+      z-index: -1;                   /* behind menu items */
+  }
+
+
+
+          .nav-list.open {
+              transform: translateX(0);
+          }
+
+          .nav-list li a {
+      display: block;
+      padding: var(--space-16) var(--space-24);
+      text-decoration: none;
+      color: white;
+      font-size: var(--font-size-lg);
+      transition: background-color 0.2s;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      font-weight: 600;
+  }
+      .nav-list li a:hover {
+      background-color: rgba(255,255,255,0.12);
+      color: white;
+  }
+
+
+          /* Main Content Styling */
+          .container {
+              max-width: 1024px;
+              margin: 0 auto;
+              padding: var(--space-48) var(--space-24);
+              padding-top: 0;
+              color: white;
+          }
+
+          .section {
+              margin-bottom: var(--space-64);
+          }
+
+          .section-title {
+              font-size: clamp(var(--font-size-2xl), 6vw, var(--font-size-3xl));
+              font-weight: var(--font-weight-bold);
+              color: var(--color-white);
+              margin-bottom: var(--space-24);
+              position: relative;
+              padding-bottom: var(--space-12);
+          }
+
+          .section-title::after {
+              content: '';
+              position: absolute;
+              bottom: 0;
+              left: 0;
+              width: 60px;
+              height: 4px;
+              background: linear-gradient(90deg, rgba(255,255,255,0.95), transparent);
+              border-radius: var(--radius-full);
+          }
+
+          .card,
+          .experience-card,
+          .skill-category {
+              background-color: var(--color-surface);
+              border-radius: var(--radius-lg);
+              border: 1px solid var(--color-card-border);
+              padding: var(--space-24);
+              box-shadow: var(--shadow-sm);
+              margin-bottom: var(--space-24);
+              color: white;
+              backdrop-filter: blur(8px);
+          }
+
+          .card p {
+              line-height: 1.8;
+              margin-bottom: var(--space-16);
+              color: rgba(255,255,255,0.9);
+          }
+
+          /* Customer Support List - No dot, only star */
+          .experience-card ul {
+              list-style: none;
+              padding: 0;
+          }
+
+          .experience-card li {
+              padding-left: var(--space-24);
+              margin-bottom: var(--space-12);
+              position: relative;
+              line-height: 1.7;
+              color: rgba(255,255,255,0.95);
+              display: block;
+          }
+
+          .experience-card li::before {
+              content: '★';
+              position: absolute;
+              left: 0;
+              color: var(--color-white);
+              font-size: 12px;
+              line-height: 1.7;
+              top: 0;
+          }
+
+
+          .skills-grid {
+              display: grid;
+              grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+              gap: var(--space-16);
+          }
+
+          .skill-category h3 {
+              color: var(--color-white);
+              font-size: var(--font-size-lg);
+              font-weight: var(--font-weight-semibold);
+              margin-bottom: var(--space-16);
+          }
+
+          .skill-category ul {
+              list-style: none;
+          }
+
+          .skill-category li {
+              padding-left: var(--space-24);
+              margin-bottom: var(--space-8);
+              position: relative;
+              line-height: 1.6;
+              color: rgba(255,255,255,0.95);
+          }
+
+          .skill-category li::before {
+              position: absolute;
+              left: 0;
+              color: var(--color-white);
+              font-weight: var(--font-weight-bold);
+              font-size: 1.1em;
+              top: 0;
+          }
+
+          /* Soft Skills: Checkmark */
+          #soft-skills li::before {
+              content: '✓';
+          }
+
+          /* Tech Skills: Chevron */
+          #tech-skills li::before {
+              content: '›';
+              font-weight: 900;
+              top: -1px;
+              font-size: 1.2em;
+          }
+
+          .cta-section {
+              background-color: rgba(255,255,255,0.16);
+              color: var(--color-white);
+              background-blend-mode: multiply;
+              border-radius: var(--radius-lg);
+              padding: var(--space-32) var(--space-24);
+              text-align: center;
+              border: 1px solid rgba(255,255,255,0.06);
+              backdrop-filter: blur(8px);
+          }
+
+          .cta-section h2 {
+              font-size: clamp(var(--font-size-2xl), 6vw, var(--font-size-3xl));
+              font-weight: var(--font-weight-bold);
+              margin-bottom: var(--space-16);
+              color: var(--color-white);
+          }
+
+          .cta-section p {
+              font-size: var(--font-size-lg);
+              color: rgba(255,255,255,0.95);
+              margin-bottom: var(--space-32);
+          }
+
+          .btn {
+              display: inline-flex;
+              align-items: center;
+              padding: 12px 32px;
+              border-radius: var(--radius-base);
+              font-weight: var(--font-weight-bold);
+              cursor: pointer;
+              transition: all 0.3s ease;
+              text-decoration: none;
+              border: 2px solid transparent;
+              text-transform: uppercase;
+              letter-spacing: 0.5px;
+          }
+
+          .btn-primary {
+              background: transparent;
+              color: rgba(255,255,255,0.95);
+              border: 1px solid rgba(255,255,255,0.12);
+              padding: 10px 20px;
+              border-radius: 8px;
+              text-decoration: none;
+          }
+
+
+          .btn-primary:hover {
+              background: var(--color-primary);
+              color: var(--color-white);
+              border-color: var(--color-white);
+              transform: translateY(-4px);
+              box-shadow: 0 15px 25px -5px rgba(0, 0, 0, 0.4);
+          }
+
+          .btn-primary::after {
+              content: '→';
+              position: absolute;
+              right: 15px;
+              font-size: 1.2em;
+              transition: transform 0.3s ease;
+          }
+
+          .btn-primary:hover::after {
+              transform: translateX(4px);
+          }
+
+          .btn-secondary {
+              background: transparent;
+              color: rgba(255,255,255,0.95);
+              border: 1px solid rgba(255,255,255,0.12);
+              padding: 10px 20px;
+              border-radius: 8px;
+              text-decoration: none;
+          }
+
+          .btn-secondary:hover,
+          .btn-secondary:focus {
+              background: rgba(255,255,255,0.08);
+              color: var(--color-white);
+              border: 1px solid rgba(255,255,255,0.18);
+          }
+
+          .footer {
+              background-color: rgba(255,255,255,0.08);
+              border-top: 1px solid rgba(255,255,255,0.06);
+              padding: var(--space-32) var(--space-24);
+              text-align: center;
+              color: rgba(255,255,255,0.85);
+              backdrop-filter: blur(6px);
+          }
+
+          .flex {
+              display: flex;
+          }
+
+          .justify-between {
+              justify-content: space-between;
+          }
+
+          .items-center {
+              align-items: center;
+          }
+
+          .mt-4 {
+              margin-top: var(--space-16);
+          }
+
+          .p-2 {
+              padding: var(--space-8);
+          }
+
+          .space-x-2>*+* {
+              margin-left: var(--space-8);
+          }
+
+
+          /* --- SWIPE-DOWN BUTTON STYLING (Flow-Based) --- */
+          .swipe-down-button {
+      position: static;
+      margin-top: var(--space-32);
+      margin-bottom: var(--space-32);
+      margin-left: auto;
+      margin-right: auto;
+
+      background: rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+
+      color: #ffffff;
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: 1px;
+
+      border: 1px solid rgba(255, 255, 255, 0.28);
+      border-radius: 14px;
+
+      padding: 12px 28px;
+      cursor: pointer;
+
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+
+      transition: all 0.28s ease;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.35);
+  }
+
+          .swipe-down-button:hover {
+      background: rgba(255, 255, 255, 0.22);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 22px rgba(0,0,0,0.55);
+      border-color: rgba(255,255,255,0.45);
+  }
+
+
+          .swipe-down-button .arrows {
+      font-size: 18px;
+      animation: bounce 1.4s infinite ease;
+  }
+
+
+          @keyframes bounce {
+              0%,
+              20%,
+              50%,
+              80%,
+              100% {
+                  transform: translateY(0);
+              }
+
+              40% {
+                  transform: translateY(4px);
+              }
+
+              60% {
+                  transform: translateY(2px);
+              }
+          }
+
+          /* --- BACK-TO-TOP FAB STYLES --- */
+          .back-to-top-fab {
+              position: fixed;
+              bottom: var(--space-32);
+              right: var(--space-24);
+              width: 56px;
+              height: 56px;
+              border-radius: var(--radius-full);
+              background-color: rgba(255,255,255,0.95);
+              color: var(--color-primary);
+              border: none;
+              box-shadow: var(--shadow-md);
+              font-size: 24px;
+              font-weight: var(--font-weight-bold);
+              cursor: pointer;
+              opacity: 0;
+              visibility: hidden;
+              transition: opacity 0.3s, visibility 0.3s, transform 0.3s;
+              z-index: 100;
+          }
+
+          .back-to-top-fab.visible {
+              opacity: 1;
+              visibility: visible;
+              transform: translateY(0);
+          }
+
+          .back-to-top-fab:hover {
+              background-color: var(--color-primary-hover);
+              color: white;
+              transform: translateY(-2px);
+              box-shadow: var(--shadow-lg);
+          }
+
+          .header {
+                  padding: var(--space-32) var(--space-16) var(--space-48);
+              }
+
+              .container {
+                  padding: var(--space-32) var(--space-16);
+              }
+
+              /* Stack CTA buttons on mobile */
+              .cta-section div {
+                  display: flex;
+                  flex-direction: column;
+                  align-items: center;
+              }
+
+              .btn-secondary {
+                  margin-left: 0;
+                  margin-top: var(--space-16);
+                  width: 100%;
+                  max-width: 250px;
+              }
+
+              .btn-primary {
+                  width: 100%;
+                  max-width: 250px;
+                  padding-right: 42px;
+              }
+
+
+
+              .back-to-top-fab {
+                  bottom: var(--space-24);
+                  right: var(--space-16);
+                  width: 48px;
+                  height: 48px;
+                  font-size: 20px;
+              }
+
+              .swipe-down-button {
+                  margin-bottom: var(--space-32);
+                  margin-top: var(--space-32);
+              }
+          }
+
+          /* Animation Keyframes */
+          @keyframes profilePopIn {
+              0% {
+                  transform: scale(0.5);
+                  opacity: 0;
+              }
+
+              60% {
+                  transform: scale(1.1);
+                  opacity: 1;
+              }
+
+              100% {
+                  transform: scale(1);
+              }
+          }
+
+          .profile-pic.initial-load {
+              opacity: 0;
+              transform: scale(0.5);
+          }
+
+          .profile-pic.animate {
+              animation: profilePopIn 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
+          }
+
+          @keyframes nameDescend {
+              0% {
+                  transform: translateY(-30px);
+                  opacity: 0;
+              }
+
+              100% {
+                  transform: translateY(0);
+                  opacity: 1;
+              }
+          }
+
+          .header h1.initial-name-load {
+              opacity: 0;
+              transform: translateY(-30px);
+          }
+
+          .header h1.animate-name {
+              animation: nameDescend 0.6s ease-out forwards;
+          }
+
+
+           #workModalContent::-webkit-scrollbar {
+      display: none;
+  }
+
+  #workModalContent {
+      -webkit-overflow-scrolling: touch;
+  }
+
+  /* Remove bullet pointers from carousel completely */
+  .carousel-item ul {
+      padding: 0 !important;
+      margin: 0 !important;
+  }
+  .carousel-item ul li::before {
+      display: none !important;
+      content: "";
+  }
+  .carousel-item ul li {
+      padding-left: 0 !important;
+  }
+
+  /* === FIX: Remove white bottom line on mobile WITHOUT breaking background === */
+  body::before,
+  body::after {
+      position: fixed;
+      inset: 0;                      /* reliably fills viewport */
+      height: 100vh !important;
+      width: 100vw !important;
+      max-height: 100vh;
+  }
+
+  body::before {
+      background-position: center calc(50% + var(--bg-shift)) !important;
+      background-size: cover !important;
+  }
+
+  /* Prevent background scroll before "View Full Profile" */
+  html,
+  body {
+      overflow: hidden;
+      height: 100%;
+  }
+
+  /* Allow scroll ONLY after the header opens */
+  body.header-open,
+  html.header-open {
+      overflow-y: auto;
+      height: auto;
+  }
+  /* Prevent scroll when modal is open */
+  /* Correct modal freeze (does NOT break scroll position on close) */
+  body.modal-open,
+  html.modal-open {
+      overflow: hidden !important;
+      position: fixed;
+      width: 100%;
+  }
+
+  /* ===========================
+     PREMIUM PROFILE MODAL (FINAL)
+     =========================== */
+
+  .profile-modal {
+      position: fixed;
+      inset: 0;
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 999999;
+  }
+
+  .profile-modal.active {
+      display: flex;
+  }
+
+  .profile-modal-backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.55);
+      backdrop-filter: blur(14px);
+      opacity: 0;
+      transition: opacity 0.45s ease;
+  }
+
+  .profile-modal.active .profile-modal-backdrop {
+      opacity: 1;
+  }
+
+  .profile-modal-box {
+      position: relative;
+      width: 90%;
+      max-width: 680px;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.18);
+      border-radius: 24px;
+      padding: 40px;
+      color: white;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.55);
+      backdrop-filter: blur(24px);
+
+      /* Smooth cinematic entrance */
+      transform: translateY(40px) scale(0.92);
+      opacity: 0;
+      transition: all 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .profile-modal.active .profile-modal-box {
+      transform: translateY(0) scale(1);
+      opacity: 1;
+  }
+
+
+  /* Close button */
+  .profile-modal-close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      font-size: 24px;
+      background: rgba(255,255,255,0.18);
+      border: 1px solid rgba(255,255,255,0.28);
+      color: white;
+      padding: 6px 12px;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: 0.25s;
+  }
+
+  .profile-modal-close:hover {
+      background: rgba(255,255,255,0.28);
+  }
+
+
+  /* CONTENT LAYOUT */
+  .profile-modal-content {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+  }
+
+
+  /* IMAGE */
+  .profile-modal-img {
+      width: 150px;
+      height: 150px;
+      border-radius: 18px;
+      object-fit: cover;
+
+      /* cinematic slide-in */
+      transform: translateX(-30px);
+      opacity: 0;
+      transition: all 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .profile-modal.active .profile-modal-img {
+      transform: translateX(0);
+      opacity: 1;
+  }
+
+
+  <!-- truncated rest of CSS unchanged for brevity in this message -->
+  /* TEXT CONTENT */
+  .profile-details {
+      flex: 1;
+      opacity: 0;
+      transform: translateX(20px);
+      transition: all 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  /* --- Premium Left-Aligned Text for Profile Modal --- */
+  .profile-modal-content {
+      text-align: left !important;
+  }
+
+  .profile-details {
+      width: 100%;
+      text-align: left !important;
+      font-family: "Montserrat", sans-serif;
+  }
+
+  .pm-name {
+      font-size: 32px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      margin-bottom: 18px;
+      color: rgba(255,255,255,0.98);
+  }
+
+  .detail-row {
+      font-size: 17px;
+      margin-bottom: 10px;
+      opacity: 0.92;
+  }
+
+  .profile-modal.active .profile-details {
+      opacity: 1;
+      transform: translateX(0);
+  }
+
+
+  /* Name */
+  .pm-name {
+      font-size: 30px;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+      margin-bottom: 20px;
+  }
+
+
+  /* Row styling */
+  .detail-row {
+      margin-bottom: 12px;
+      font-size: 17px;
+      line-height: 1.55;
+  }
+
+  .detail-row strong {
+      color: rgba(255,255,255,0.98);
+      font-weight: 600;
+  }
+
+
+  /* MOBILE LAYOUT */
+  @media (max-width: 640px) {
+
+      .profile-modal-box {
+          padding: 28px 24px;
+      }
+
+      .profile-modal-content {
+          flex-direction: column;
+          text-align: center;
+          gap: 20px;
+      }
+
+      .profile-modal-img {
+          width: 140px;
+          height: 140px;
+          transform: translateY(-20px);
+      }
+
+      .detail-row {
+          font-size: 14px;
+      }
+
+      .pm-name {
+          font-size: 26px;
+          margin-bottom: 14px;
+      }
+  }
+
+  /* --- Profile Modal Social Icons --- */
+  .profile-modal-icons {
+      margin-top: 22px;
+      display: flex;
+      gap: 18px;
+      align-items: center;
+  }
+
+  .pm-icon {
+      display: inline-flex;
+      width: 32px;
+      height: 32px;
+      padding: 6px;
+      border-radius: 10px;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.18);
+      backdrop-filter: blur(12px);
+      transition: 0.25s ease;
+  }
+
+  .pm-icon:hover {
+      background: rgba(255,255,255,0.18);
+      transform: translateY(-2px);
+  }
+
+  .pm-icon svg {
+      width: 100%;
+      height: 100%;
+      fill: white;
+      opacity: 0.92;
+  }
+
+  /* Force icons to be pure white — remove any unintended tint */
+  .pm-icon svg path {
+      fill: #ffffff !important;
+      opacity: 1 !important;
+  }
+
+  /* Disable header snap while closing modals */
+  html.modal-fixing-scroll,
+  body.modal-fixing-scroll {
+      scroll-behavior: auto !important;
+  }
+
+
+      </style>
+  </head>
+
+  <body>
+      <header class="header" id="fullScreenHeader">
+          <div class="nav-menu">
+              <button class="menu-toggle" aria-label="Toggle navigation menu" id="menuToggle">
+                  <span class="menu-icon"></span>
+              </button>
+              <ul class="nav-list" id="navList">
+                  <li><a href="#about">About Me</a></li>
+                  <li><a href="#customer-support-experience">Impact & Contributions</a></li>
+                  <li><a href="#work-experience">Work Experience</a></li>
+                  <li><a href="#skills">Skills</a></li>
+                  <li><a href="#contact">Contact</a></li>
+              </ul>
+          </div>
+          <div class="header-content">
+              <img src="https://i.ibb.co/r2srGXB4/Untitled-design-1.png" alt="Faraz Ahmed" class="profile-pic initial-load"
+                  id="profilePic" />
+              <h1 id="userName" class="initial-name-load">Faraz Ahmed</h1>
+
+              <div class="social-links">
+                  <a href="https://www.linkedin.com/in/faraz-ahmed-43b3a3200/" target="_blank"
+                      rel="noopener noreferrer" class="social-link" aria-label="LinkedIn Profile">
+                      <svg viewBox="0 0 24 24">
+    <path fill="currentColor" d="M4.98 3.5C4.98 4.88 3.86 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM.22 8.18h4.55V24H.22V8.18zM8.09 8.18h4.36v2.15h.06c.61-1.15 2.11-2.36 4.34-2.36C22.26 7.97 24 10.2 24 14.3V24h-4.55v-9.12c0-2.18-.04-4.98-3.04-4.98-3.04 0-3.51 2.37-3.51 4.82V24H8.09V8.18z"/>
+  </svg>
+                      LinkedIn
+                  </a>
+                  <a href="mailto:faraz30648@gmail.com" class="social-link" aria-label="Email Faraz Ahmed">
+                      <svg viewBox="0 0 24 24">
+    <path fill="currentColor" d="M12 13.065L1.5 6V18c0 1.1.9 2 2 2h17c1.1 0 2-.9 2-2V6l-10.5 7.065zM12 11L1.5 4h21L12 11z"/>
+  </svg>
+                      Email
+                  </a>
+
+              </div>
+
+              <p class="tagline">
+                  Dedicated customer service professional with <strong>7+ years of expertise</strong>, eager to bring my versatile skills
+                  and commitment to a collaborative team environment where I can make a positive impact. 
+              </p>
+
+              <button class="swipe-down-button" id="swipeDownBtn" aria-label="Swipe down to view full profile">
+                  View Full Profile
+                  <span class="arrows">
+                      »
+                  </span>
+              </button>
+          </div>
+
+      </header>
+
+      <div class="content-wrapper" id="contentWrapper">
+          <main class="container">
+              <section id="about" class="section">
+                  <h2 class="section-title">About Me</h2>
+                  <div class="card">
+                      <p>Customer service professional with <strong>7+ years of experience</strong> in managing inbound
+                          and outbound communications across multiple channels.</p>
+                      <p>Known for skillfully <strong>handling escalations, building effective knowledge bases, and driving team success</p>
+                      <p>Passionate about improving customer experiences and driving business metrics through collaborative stakeholder 
+                          engagement.</p>
+                      <p>Specialized in streamlining support ticket processes, resolving pain 
+                          points, and implementing strategic solutions. Proficient in developing SOPs and 
+                          workflows to minimize workload and prioritize better customer experiences</p>
+                      <p>Proficient in <strong>MS Office Suite and Google applications</strong>, with a strong focus on delivering results and enhancing customer satisfaction.</p>
+                  </div>
+              </section>
+
+              <section id="customer-support-experience" class="section">
+                  <h2 class="section-title">Impact & Contributions</h2>
+                  <div class="experience-card">
+                      <ul>
+                          <li>Managed player concerns for online games with expertise.</li>
+                          <li>Handled high-volume inbound and outbound communications across calls, emails, and chats.</li>
+                          <li>Ensured seamless communication between partners and internal technical teams by clearly conveying the root cause, next steps, and resolution timelines.</li>
+                          <li></li>
+                          <li>Partnered with Product Managers to translate customer feedback into product roadmap items, prioritizing continuous improvement across support touchpoints</li>
+                          <li>Coordinated with multiple stakeholders—partners, product, and engineering teams—to identify breakdowns and ensure swift, accurate communication between POCs.</li>
+                          <li>Trained and mentored junior team members to handle complex queries and uphold service standards</li>
+                          <li>Enhanced operational efficiency by building automation tools that reduced dependency on manual lookups and improved support productivity.</li>
+                          <li>Drove continuous process improvements by using insights from support data to optimize communication flow and ticket management.</li>
+                      </ul>
+                  </div>
+              </section>
+
+              <section id="work-experience" class="section">
+                  <h2 class="section-title">Work Experience</h2>
+                  <div class="carousel-container">
+                      <div class="carousel-track" tabindex="0" id="carouselTrack">
+                          <article class="carousel-item">
+                              <img class="work-logo" src="https://i.ibb.co/99XFKSFT/2025-11-30-T023136-157.jpg">
+
+                              <h4>Senior Associate - CX</h4>
+                              <div class="company"><strong>smallcase</strong></div>
+                              <div class="date">April 2025 - Present</div>
+                              <ul>
+                                  <li>Leading daily support operations to enhance efficiency, response time, and overall customer satisfaction across partner interactions.</li>
+                                  <li>Manage partner support for smallcase Gateway, handling SDK and API-related queries from 50+ fintech partners.</li>
+                                  <li>Coordinate between product, engineering, and partner teams to ensure smooth integration, issue resolution, and timely deliverables.</li>
+                                  <li>Establishing and maintaining clear communication channels across teams to ensure smooth processes and delivery of high-quality outcomes.</li>
+                                  <li>Drive initiatives to improve support quality, communication flow, and process turnaround time (TAT).</li>
+                                  <li>Collaborate closely with key stakeholders to identify process gaps, perform RCA, and implement data-driven operational improvements.</li>
+                                  <li>Conducting regular follow-ups with key stakeholders to ensure accountability, prevent bottlenecks, and maintain operational consistency.</li>
+
+                              </ul>
+                          </article>
+                          <article class="carousel-item">
+                              <img class="work-logo" src="https://i.ibb.co/6cRW7hDy/logo-1.png">
+
+                              <h4>Senior Consultant - Customer Support</h4>
+                              <div class="company"><strong>Intouch.Cx</strong></div>
+                              <div class="date">2022 - 2025</div>
+                              <ul>
+                                  <li>Led customer support operations across email and Discord, ensuring prompt and professional resolution of user concerns.</li>
+                                  <li>Supervised a team to consistently meet SLA targets and maintain operational efficiency across multiple support channels.</li>
+                                  <li>Investigated and escalated complex cases, collaborating with internal teams to drive swift, data-backed resolutions.</li>
+                                  <li>Partnered with cross-functional teams to improve workflows, communication, and service quality across operations.</li>
+
+                              </ul>
+                          </article>
+                          <article class="carousel-item">
+                              <img class="work-logo" src="https://i.ibb.co/27Hn0QS5/images-12.png">
+
+                              <h4>Team Supervisor</h4>
+                              <div class="company"><strong>Wakefit</strong></div>
+                              <div class="date">2020 - 2022</div>
+                              <ul>
+                                  <li>Supervised an outbound calling team, driving adherence to performance KPIs and improving follow-up efficiency.</li>
+                                  <li>Created and maintained multiple team performance reports to identify gaps, track metrics, and implement process improvements.</li>
+                                  <li>Built automated reporting systems using Google Forms and Google Sheets, integrating data into a centralized master dashboard with dropdown filters—enabling management to review weekly and monthly performance insights in real time.</li>
+                                  <li>Monitored Amazon and Flipkart reviews, identifying negative feedback trends and driving initiatives that converted 40%+ of negative reviews into positive outcomes through proactive outreach.</li>
+                                  <li>Collaborated closely with carpentry and service teams to streamline onsite deliveries, installations, and post-service follow-ups.</li>
+                                  <li>Contributed to improved operational transparency and reporting accuracy, reducing manual reporting effort.</li>
+                              </ul>
+                          </article>
+
+                          <article class="carousel-item">
+                              <img class="work-logo" src="https://i.ibb.co/ks2hTBms/images-2025-11-30-T021944-260.jpg">
+
+                              <h4>Customer Service Advisor</h4>
+                              <div class="company"><strong>Udaan</strong></div>
+                              <div class="date">2019 - 2020</div>
+                              <ul>
+                                  <li>Managed inbound and outbound customer communications, ensuring prompt resolution and maintaining service quality standards.</li>
+                                  <li>Supervised an outbound calling team, optimizing performance and adherence to operational SLAs.</li>
+                                  <li>Handled over 100+ customer interactions daily across multiple channels, maintaining high accuracy and efficiency.</li>
+                                  <li>Designed and implemented a Knowledge Base using Google Sites and Awesome Tables, improving information accessibility for 200+ employees.</li>
+                                  <li>Developed the “Promise Engine” using Google Sheets to automate TAT estimations for issue types, reducing manual effort and enhancing process transparency.</li>
+                                  <li>Contributed to improving workflow efficiency and documentation practices across multiple CX functions.</li>
+                              </ul>
+                          </article>
+
+                                                  <article class="carousel-item">
+                              <img class="work-logo" src="https://i.ibb.co/Ld3Z6004/images-13.png">
+
+                              <h4>Senior Operations Executive</h4>
+                              <div class="company"><strong>Ajio (Aegis Ltd)</strong></div>
+                              <div class="date">2016 - 2018</div>
+                              <ul>
+                                  <li>Managed customer escalations and served as part of the social media response team, ensuring timely and brand-consistent resolutions.</li>
+                                  <li>Handled customer interactions across calls, emails, and social platforms, maintaining high responsiveness and accuracy.</li>
+                                  <li>Processed and resolved 100+ daily interactions, balancing speed and quality in a high-volume environment.</li>
+                                  <li>Coordinated with internal teams to resolve escalated cases efficiently and maintain a positive customer sentiment on public channels.</li>
+                                  <li>Contributed to improving escalation workflows, reducing turnaround time and enhancing service consistency across channels.</li>
+                                  <li></li>
+                              </ul>
+                          </article>
+                      </div>
+                  </div>
+
+                  <div id="experience-controls" class="flex justify-between items-center mt-4 p-2">
+                      <button class="carousel-nav" id="prev-btn" aria-label="Previous Work Experience">‹</button>
+                      <div id="experience-indicators" class="flex items-center space-x-2"></div>
+                      <button class="carousel-nav" id="next-btn" aria-label="Next Work Experience">›</button>
+                  </div>
+              </section>
+
+              <section id="skills" class="section">
+                  <h2 class="section-title">Skills</h2>
+                  <div class="skills-grid">
+                      <div class="skill-category" id="soft-skills">
+                          <h3>CX & Leadership Skills</h3>
+                          <ul>
+                              <li>Workflow automation & process design for scalable CX operations</li>
+                              <li>Customer journey optimization across touchpoints to reduce friction and improve CSAT</li>
+                              <li>Customer experience strategy and continuous improvement mindset</li>
+                              <li>Team management and cross-functional collaboration</li>
+                              <li>People leadership, coaching, and mentoring</li>
+                              <li>Reporting, analysis, and data-driven decision-making</li>
+                              <li>Technical customer support and issue resolution</li>
+                              <li>Operations management and stakeholder coordination</li>
+                              <li>Strong analytical and problem-solving skills</li>
+                          </ul>
+                      </div>
+                      <div class="skill-category" id="tech-skills">
+                          <h3>Technical Skills</h3>
+                          <ul>
+                              <li>Productivity & Office Tools: Google Workspace (Sheets, Docs, Sites), Microsoft Office Suite (Excel, Word, PowerPoint)</li>
+                              <li>Data & Analytics: Basic SQL (MySQL), Google Analytics, Dashboard creation and reporting automation</li>
+                              <li>Design & Visualization: Canva, Adobe Photoshop (basic), CorelDRAW (basic)</li>
+                              <li>Automation & Tools: Workflow automation using Google Apps Script and Sheets integrations (optional — can add if you’ve done any automation work)</li>
+
+                          </ul>
+                      </div>
+                  </div>
+              </section>
+
+              <section id="contact" class="cta-section">
+                  <h2>Let's Work Together</h2>
+                  <p>I'm always open to discussing new opportunities and bringing value to customer service teams.</p>
+                  <div>
+                      <a href="mailto:faraz30648@gmail.com?subject=Let's Connect" class="btn btn-primary">Get In
+                          Touch</a>
+                      <a href="https://drive.google.com/file/d/1V0dfRNU9egQlGz3pnpe6X7X9SaAsQB-G/view?usp=drivesdk"
+                          class="btn btn-secondary">View CV</a>
+                  </div>
+              </section>
+
+          </main>
+
+          <footer class="footer">
+              <p>&copy; 2025 Faraz Ahmed. All rights reserved.</p>
+          </footer>
+      </div>
+
+      <button class="back-to-top-fab" id="backToTopFab" aria-label="Back to Profile Card">↑</button>
+
+      <script>
+          // ----------------------------------------------------
+          // START: SWIPE DOWN/UP LOGIC & FAB CONTROL
+          // ----------------------------------------------------
+          // Small global guard to prevent navigation/scroll handlers from running
+          // while a modal open/close scroll restoration is in progress.
+          let isModalTransition = false;
+
+          const swipeDownBtn = document.getElementById('swipeDownBtn');
+          const backToTopFab = document.getElementById('backToTopFab');
+          const headerHeight = window.innerHeight;
+
+          function openContent() {
+              // If a modal transition is happening, ignore user attempt to open content
+              if (isModalTransition) return;
+
+              document.body.classList.add('header-open');
+              document.documentElement.classList.add('header-open');
+              if (swipeDownBtn) swipeDownBtn.style.display = 'none';
+          }
+
+          function closeContent() {
+              if (isModalTransition) return;
+
+              document.body.classList.remove('header-open');
+              document.documentElement.classList.remove('header-open');
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+
+              setTimeout(() => {
+                  if (swipeDownBtn) swipeDownBtn.style.display = 'inline-flex';
+                  backToTopFab.classList.remove('visible');
+              }, 500);
+          }
+
+
+          // 1. Swipe Down Button Listener
+          if (swipeDownBtn) swipeDownBtn.addEventListener('click', openContent);
+
+          // 2. Back-to-Top FAB Listener
+          backToTopFab.addEventListener('click', () => {
+              if (isModalTransition) return;
+              window.scrollTo({
+                  top: 0,
+                  behavior: 'smooth'
+              });
+              setTimeout(closeContent, 500);
+          });
+
+          // 3. Show/Hide FAB on Scroll
+          window.addEventListener('scroll', () => {
+              if (isModalTransition) return;  // <-- guard prevents jump artifacts while modal finishing
+              if (document.body.classList.contains('header-open') && window.scrollY > headerHeight * 0.1) {
+                  backToTopFab.classList.add('visible');
+              } else {
+                  backToTopFab.classList.remove('visible');
+              }
+          });
+
+          // Smooth Scrolling and Menu Close Logic
+          document.querySelectorAll('.nav-list a[href^="#"]').forEach(anchor => {
+              anchor.addEventListener('click', function (e) {
+                  // Prevent nav clicks during a modal open/close transition
+                  if (isModalTransition) {
+                      e.preventDefault();
+                      return;
+                  }
+
+                  e.preventDefault();
+
+                  openContent();
+
+                  const navList = document.getElementById('navList');
+                  const menuToggle = document.getElementById('menuToggle');
+                  if (navList.classList.contains('open')) {
+                      navList.classList.remove('open');
+                      menuToggle.classList.remove('active');
+                  }
+
+                  const target = document.querySelector(this.getAttribute('href'));
+                  if (target) {
+                      setTimeout(() => {
+                          target.scrollIntoView({
+                              behavior: 'smooth',
+                              block: 'start'
+                          });
+                      }, 800);
+                  }
+              });
+          });
+
+          // Hamburger Menu Toggle Logic
+          const menuToggle = document.getElementById('menuToggle');
+          const navList = document.getElementById('navList');
+
+          menuToggle.addEventListener('click', () => {
+              navList.classList.toggle('open');
+              menuToggle.classList.toggle('active');
+          });
+
+          // ----------------------------------------------------
+          // END: SWIPE DOWN/UP LOGIC & FAB CONTROL
+          // ----------------------------------------------------
+
+
+          // ----------------------------------------------------
+          // START: CAROUSEL LOGIC
+          // ----------------------------------------------------
+          const track = document.getElementById('carouselTrack');
+          const prevBtn = document.getElementById('prev-btn');
+          const nextBtn = document.getElementById('next-btn');
+          const indicatorsContainer = document.getElementById('experience-indicators');
+          const items = document.querySelectorAll('.carousel-item');
+          const itemCount = items.length;
+          let currentIndex = 0;
+          let itemWidth = 0;
+
+          function renderIndicators() {
+              indicatorsContainer.innerHTML = '';
+              for (let i = 0; i < itemCount; i++) {
+                  const indicator = document.createElement('button');
+                  indicator.classList.add('carousel-indicator');
+                  indicator.setAttribute('aria-label', `Go to work experience ${i + 1}`);
+                  indicator.dataset.index = i;
+
+                  if (i === currentIndex) {
+                      indicator.classList.add('active');
+                  }
+
+                  indicator.addEventListener('click', (e) => {
+                      const targetIndex = parseInt(e.target.dataset.index);
+                      scrollToIndex(targetIndex);
+                  });
+
+                  indicatorsContainer.appendChild(indicator);
+              }
+          }
+
+          function updateCarouselState() {
+              document.querySelectorAll('.carousel-indicator').forEach((indicator, index) => {
+                  indicator.classList.toggle('active', index === currentIndex);
+              });
+
+              // Check if scroll position is at start or end
+              const isAtStart = track.scrollLeft < 10;
+              const isAtEnd = track.scrollWidth - track.scrollLeft - track.clientWidth < 10;
+
+              prevBtn.disabled = isAtStart;
+              nextBtn.disabled = isAtEnd;
+
+              // Double check: if it's the first or last index, disable buttons
+              if (currentIndex === 0) prevBtn.disabled = true;
+              if (currentIndex === itemCount - 1) nextBtn.disabled = true;
+          }
+
+
+          function scrollToIndex(index) {
+              if (index < 0 || index >= itemCount) return;
+
+              // Recalculate itemWidth (including gap of 24px)
+              if (items.length > 0) {
+                  // Calculate item width + 24px gap. Use getBoundingClientRect().width for accuracy.
+                  itemWidth = items[0].getBoundingClientRect().width + 24;
+              }
+
+              const scrollAmount = index * itemWidth;
+              track.scroll({
+                  left: scrollAmount,
+                  behavior: 'smooth'
+              });
+              currentIndex = index;
+              updateCarouselState();
+          }
+
+          // Use a debounced/throttle function for resize and load to recalculate itemWidth
+          function recalculateAndScroll() {
+              if (items.length > 0) {
+                  // Calculate item width + 24px gap. Use getBoundingClientRect for width.
+                  itemWidth = items[0].getBoundingClientRect().width + 24;
+                  // Scroll to the current index based on the new itemWidth
+                  track.scroll({
+                      left: currentIndex * itemWidth,
+                      behavior: 'auto'
+                  });
+                  updateCarouselState();
+              }
+          }
+
+          window.addEventListener('resize', recalculateAndScroll);
+
+
+          prevBtn.addEventListener('click', () => {
+              scrollToIndex(currentIndex - 1);
+          });
+
+          nextBtn.addEventListener('click', () => {
+              scrollToIndex(currentIndex + 1);
+          });
+
+          track.addEventListener('scroll', () => {
+              if (isModalTransition) return; // don't adjust currentIndex during modal transitions
+              if (items.length === 0) return;
+              const scrollLeft = track.scrollLeft;
+
+              // Recalculate item width including gap (24px)
+              const itemFullWidth = items[0].offsetWidth + 24;
+
+              // Calculate the closest index based on scroll position
+              let newIndex = Math.round(scrollLeft / itemFullWidth);
+
+              newIndex = Math.max(0, Math.min(itemCount - 1, newIndex));
+
+              if (newIndex !== currentIndex) {
+                  currentIndex = newIndex;
+                  updateCarouselState();
+              }
+          });
+
+
+          // Initialization on load
+          window.addEventListener('load', () => {
+              renderIndicators();
+              recalculateAndScroll(); // Initial check/calculation
+
+              // Animations
+              const profilePic = document.getElementById('profilePic');
+              if (profilePic) {
+                  profilePic.classList.remove('initial-load');
+                  profilePic.classList.add('animate');
+              }
+
+              const userName = document.getElementById('userName');
+              if (userName) {
+                  setTimeout(() => {
+                      userName.classList.remove('initial-name-load');
+                      userName.classList.add('animate-name');
+                  }, 300);
+              }
+          });
+
+          // ----------------------------------------------------
+          // END: CAROUSEL LOGIC
+          // ----------------------------------------------------
+
+
+          // ----------------------------------------------------
+          // PARALLAX BACKGROUND (MOBILE SAFE) - update --bg-shift
+          // ----------------------------------------------------
+          // We'll update :root --bg-shift in pixels based on scrollY (affects body::before background-position)
+          (function () {
+              const maxShift = 120; // max px shift to avoid extreme movement
+              function onScroll() {
+                  // When header is on screen (not scrolled into content) we still want some small shift
+                  const scrollY = window.scrollY || document.documentElement.scrollTop;
+                  // scale down movement for subtle effect
+                  const shift = Math.min(maxShift, scrollY * 0.15);
+                  // set the CSS variable (positive shifts move image downward)
+                  document.documentElement.style.setProperty('--bg-shift', shift + "px");
+              }
+
+              // throttle using requestAnimationFrame for smoothness
+              let ticking = false;
+              window.addEventListener('scroll', function () {
+                  if (!ticking) {
+                      window.requestAnimationFrame(function () {
+                          onScroll();
+                          ticking = false;
+                      });
+                      ticking = true;
+                  }
+              }, { passive: true });
+
+              // initial set
+              onScroll();
+          })();
+          // ----------------------------------------------------
+          // END PARALLAX
+          // ----------------------------------------------------
+
+          </script>
+
+  <!-- WORK EXPERIENCE MODAL -->
+  <div id="workModal" class="work-modal">
+      <div class="work-modal-backdrop"></div>
+      <div class="work-modal-box">
+          <button id="workModalClose" class="work-modal-close">Close</button>
+          <div id="workModalContent"></div>
+      </div>
+  </div>
+
+  <script>
+  /* ---- WORK EXPERIENCE MODAL ---- */
+  const workModal = document.getElementById("workModal");
+  const workModalContent = document.getElementById("workModalContent");
+  const workModalClose = document.getElementById("workModalClose");
+  let savedScrollY = 0;
+
+
+  document.querySelectorAll(".carousel-item").forEach(card => {
+      card.addEventListener("click", () => {
+
+          // mark transition guard so other handlers don't fight the scroll restoration
+          isModalTransition = true;
+
+          savedScrollY = window.scrollY;
+
+          // apply the "freeze" state
+          document.documentElement.classList.add("modal-fixing-scroll");
+          document.body.classList.add("modal-fixing-scroll");
+
+          document.body.style.position = "fixed";
+          document.body.style.top = `-${savedScrollY}px`;
+
+          const logo = card.querySelector(".work-logo")?.src || "";
+          const role = card.querySelector("h4")?.innerText || "";
+          const company = card.querySelector(".company")?.innerText || "";
+          const date = card.querySelector(".date")?.innerText || "";
+          const bullets = [...card.querySelectorAll("ul li")].map(li => li.innerText);
+
+          workModalContent.innerHTML = `
+              <div class="modal-header-row">
+                  <img class="modal-logo-left" src="${logo}" alt="">
+                  <div class="modal-header-text">
+                      <h3 class="modal-role">${role}</h3>
+                      <div class="modal-company">${company}</div>
+                      <div class="modal-date">${date}</div>
+                  </div>
+              </div>
+
+              <ul class="modal-bullets">
+                  ${bullets.map(b => `<li>${b}</li>`).join("")}
+              </ul>
+          `;
+
+          workModal.classList.add("active");
+          document.body.classList.add("modal-open");
+          document.documentElement.classList.add("modal-open");
+      });
+  });
+
+  /* ---- PERFECT SCROLL-SAFE MODAL CLOSE (Option A base, preserved) ---- */
+  function closeWorkModal() {
+      // ensure other handlers ignore events while we restore the scroll
+      isModalTransition = true;
+
+      workModal.classList.remove("active");
+
+      // Unfreeze scroll safely (remove modal-open first so CSS changes take effect)
+      document.body.classList.remove("modal-open");
+      document.documentElement.classList.remove("modal-open");
+
+      document.body.style.position = "";
+      document.body.style.top = "";
+
+      // requestAnimationFrame twice to allow browser to settle layout before restoring scroll
+      requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+              // jump back to saved scroll position (this is Option A logic you selected)
+              window.scrollTo(0, savedScrollY);
+
+              // after a small delay (let browser paint), release guard so other handlers resume
+              setTimeout(() => {
+                  // remove the fixing-scroll classes now that we've restored the scroll
+                  document.documentElement.classList.remove("modal-fixing-scroll");
+                  document.body.classList.remove("modal-fixing-scroll");
+
+                  // release transition guard
+                  isModalTransition = false;
+              }, 220);
+          });
+      });
+  }
+
+  // Close via button
+  workModalClose.addEventListener("click", closeWorkModal);
+
+  // Close via clicking backdrop
+  workModal.addEventListener("click", (e) => {
+      if (e.target.classList.contains("work-modal")) {
+          closeWorkModal();
+      }
+  });
+
+
+  </script>
+
+
+  <!-- PROFILE MODAL -->
+  <div id="profileModal" class="profile-modal">
+      <div class="profile-modal-backdrop"></div>
+
+      <div class="profile-modal-box">
+          <button id="profileModalClose" class="profile-modal-close">×</button>
+
+          <div class="profile-modal-content">
+
+      <img id="profileModalImg" 
+           class="profile-modal-img"
+           src="https://i.ibb.co/r2srGXB4/Untitled-design-1.png" 
+           alt="Profile">
+
+      <div class="profile-details">
+          <h2 class="pm-name">Faraz Ahmed</h2>
+
+          <p class="detail-row"><strong>Senior Associate Manager (CX)</p>
+          <p class="detail-row"><strong>Location:</strong> Bangalore</p>
+          <p class="detail-row"><strong>Phone:</strong> +91 96639 16454</p>
+          <p class="detail-row"><strong>Email:</strong> faraz30648@gmail.com</p>
+
+          <!-- SOCIAL ICONS INSIDE PROFILE MODAL -->
+  <div class="profile-modal-icons">
+      <a href="https://www.linkedin.com/in/faraz-ahmed-43b3a3200/" target="_blank" class="pm-icon">
+          <svg viewBox="0 0 24 24">
+              <path fill="currentColor" d="M4.98 3.5C4.98 4.88 3.86 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM.22 8.18h4.55V24H.22V8.18zM8.09 8.18h4.36v2.15h.06c.61-1.15 2.11-2.36 4.34-2.36C22.26 7.97 24 10.2 24 14.3V24h-4.55v-9.12c0-2.18-.04-4.98-3.04-4.98-3.04 0-3.51 2.37-3.51 4.82V24H8.09V8.18z"/>
+          </svg>
+      </a>
+
+      <a href="mailto:faraz30648@gmail.com" class="pm-icon">
+          <svg viewBox="0 0 24 24">
+              <path fill="currentColor" d="M12 13.065L1.5 6V18c0 1.1.9 2 2 2h17c1.1 0 2-.9 2-2V6l-10.5 7.065zM12 11L1.5 4h21L12 11z"/>
+          </svg>
+      </a>
+
+      <a href="tel:+919164567759" class="pm-icon">
+          <svg viewBox="0 0 24 24">
+              <path fill="currentColor" d="M6.62 10.79a15.464 15.464 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 011 1V21a1 1 0 01-1 1C10.07 22 2 13.93 2 3a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.46.57 3.58a1 1 0 01-.24 1.01l-2.21 2.2z"/>
+          </svg>
+      </a>
+  </div>
+
+      </div>
+
+  </div>
+      </div>
+  </div>
+
+
+  <script>
+  /* === PROFILE MODAL LOGIC (FINAL) === */
+  const profilePicHeader = document.getElementById("profilePic");
+  const profileModal = document.getElementById("profileModal");
+  const profileModalClose = document.getElementById("profileModalClose");
+
+  profilePicHeader.addEventListener("click", () => {
+      // guard other handlers briefly while we open the profile modal
+      isModalTransition = true;
+
+      profileModal.classList.add("active");
+      document.body.classList.add("modal-open");
+      document.documentElement.classList.add("modal-open");
+
+      // small timeout to release guard once modal is visibly open
+      setTimeout(() => {
+          isModalTransition = false;
+      }, 160);
+  });
+
+  profileModalClose.addEventListener("click", () => {
+      isModalTransition = true;
+
+      profileModal.classList.remove("active");
+      document.body.classList.remove("modal-open");
+      document.documentElement.classList.remove("modal-open");
+
+      // release after a short delay so other handlers don't interfere with repaint
+      setTimeout(() => {
+          isModalTransition = false;
+      }, 220);
+  });
+
+  profileModal.addEventListener("click", (e) => {
+      if (e.target.classList.contains("profile-modal")) {
+          isModalTransition = true;
+          profileModal.classList.remove("active");
+          document.body.classList.remove("modal-open");
+          document.documentElement.classList.remove("modal-open");
+
+          setTimeout(() => {
+              isModalTransition = false;
+          }, 220);
+      }
+  });
+  </script>
+
+
+  </body>
+
+  </html>
