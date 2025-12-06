@@ -927,13 +927,25 @@
         .footer-icons a:hover svg {
             opacity: 1;
         }
+        
+        /* Unified hover animation for ALL footer icons */
+.footer-icons a svg,
+.footer-icons a .footer-blog-icon {
+    transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+.footer-icons a:hover svg,
+.footer-icons a:hover .footer-blog-icon {
+    transform: translateY(-1px);
+    opacity: 1;
+}
+
         /* Blog image icon — match footer SVG icons */
         .footer-blog-icon {
             width: 20px;
             height: 20px;
             object-fit: contain;
             filter: brightness(0) invert(1);
-
             opacity: 0.9;
             transition: opacity 0.25s ease, transform 0.25s ease;
 }
