@@ -927,6 +927,23 @@
         .footer-icons a:hover svg {
             opacity: 1;
         }
+        /* Blog image icon — match footer SVG icons */
+        .footer-blog-icon {
+            width: 20px;
+            height: 20px;
+            object-fit: contain;
+            filter: brightness(0) invert(1);
+
+            opacity: 0.9;
+            transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+/* Hover behavior to match SVG icons */
+.footer-icons a:hover .footer-blog-icon {
+    opacity: 1;
+    transform: translateY(-1px);
+}
+
 
         /* Make footer text not bold */
         .footer p {
@@ -1820,6 +1837,18 @@ body.modal-fixing-scroll {
         <path d="M12 13.065L1.5 6V18c0 1.1.9 2 2 2h17c1.1 0 2-.9 2-2V6l-10.5 7.065zM12 11L1.5 4h21L12 11z"/>
     </svg>
 </a>
+
+    <!-- Blog (WordPress image icon) -->
+    <a href="https://evolvingperspectivedotblog.wordpress.com/"
+       target="_blank"
+       aria-label="Blog"
+       title="Read my blog">
+        <img src="https://evolvingperspectivedotblog.files.wordpress.com/2020/11/cropped-clipart-glasses-safety-11.png"
+             alt="Blog"
+             class="footer-blog-icon">
+    </a>
+
+
   </div>
 
   <p>&copy; 2025 Faraz Ahmed. All rights reserved.</p>
